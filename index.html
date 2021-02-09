@@ -16,10 +16,31 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div id = "GeneratorContainer">
-            <form>
-                <input>
-            </form>
+        <div id="main-cntr">
+            <div id="left-cntr">
+                <div class="form__group">
+                    <div class="form__section">
+                        <input type="input" autocomplete="off" class="form__field" name="name" placeholder="Name" id='name' required />
+                        <label for="name" class="form__label">Name</label>
+                    </div>
+                    <div class="form__section">
+                        <input type="input" autocomplete="off" class="form__field" name="caption" placeholder="Caption" id='caption' required />
+                        <label for="caption" class="form__label">Caption</label>
+                    </div>
+                    <div class="form__section">
+                        <input type="input" autocomplete="off" class="form__field" name="url" placeholder="Image URL" id='url' required />
+                        <label for="url" class="form__label">ImageURL</label>
+                    </div>
+                    <div class="form__section">
+                        <button class="btn draw__border" id="post">
+                            <span>I am a MEME(r)</span> 
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="right-cntr">
+                
+            </div>
         </div>
         
         <script src="./js/index.js" async defer></script>
