@@ -60,7 +60,7 @@ function initTable() {
     );
 }
 
-// initTable(); // Only needed for initial call, handled by index.js
+// initTable(); // Only needed for initial call, handled by server.js
 
 /*  POST @ /memes
     excpects validated data
@@ -189,6 +189,46 @@ async function getNewest(idLimit) {
 // getNewest(10).then(now => console.log(now));
 
 
+/*  GET @ /memes/next/<id>
+    excpects valid id or empty field
+    if id is an invalid integer, handles accordingly
+    returns first row or previous row (displayed as next) depending on the parameter
+    UNIT Pagination
+*/
+
+async function getPrevious(offset) {
+    const client = new Client(connectionString);
+    try {
+        
+        if ( offset == null || offset.length === 0 ) {
+            await client.connect();
+            let sequence_name = await client.query(
+                `SELECT pg_get_serial_sequence('memeEntries', 'id');`);
+            sequence_name = sequence_name.rows[0]["pg_get_serial_sequence"];
+            let result = await client.query(
+                `SELECT * FROM memeEntries WHERE id = 
+                (SELECT last_value FROM ${sequence_name});`
+            );
+            return (result.rows[0]);
+        } else {
+            await client.connect();
+            let result = await client.query(
+                `SELECT * FROM memeEntries WHERE id < ${offset}
+                ORDER BY id DESC LIMIT 1 ;`
+            );
+            return (result.rows[0]);
+        }
+    } catch(err) {
+        return err.stack;
+    } finally {
+        client.end();
+    }
+}
+
+// USAGE AS:
+// getPrevious(42).then(now => console.log(now));
+
+
 /*  PATCH @ /memes/<id>
     excpects valid id
     will also take up new values for the username, caption, imageURL
@@ -250,3 +290,9 @@ async function incrementLike(id) {
 //   console.log(err, res)
 //   pool.end()
 // })
+
+// exporting the functions for further usage, in server.js
+module.exports = {
+    initTable, insertMeme, getMeme, get100LatestPOST, getPrevious,
+    getMostActive, getNewest, patchField, incrementLike
+};
