@@ -20,9 +20,9 @@ const connectionString = "postgresql://localhost:5432/memeDB"
 
 /*  SQL Schema has
     a serially incrementing ID acting as a Primary Key
-    username provided by the client
+    name provided by the client
     caption provided by the client
-    imageURL verified and provided by the client
+    url verified and provided by the client
     like -> an int which increments with every empty PATCH request
     modified -> a timestamp to get track of latest entries
     Added trigger update_modified for updating modified to latest tuple patch
@@ -33,9 +33,9 @@ function initTable() {
     pool.query(
         `CREATE TABLE IF NOT EXISTS memeEntries( 
             id SERIAL PRIMARY KEY, 
-            username VARCHAR(100) NOT NULL, 
+            name VARCHAR(100) NOT NULL, 
             caption VARCHAR(100) NOT NULL, 
-            imageURL VARCHAR(2048) NOT NULL, 
+            url VARCHAR(2048) NOT NULL, 
             likes INTEGER DEFAULT 0,
             modified TIMESTAMP DEFAULT NOW());
         
@@ -53,7 +53,7 @@ function initTable() {
         update_modified();
         
         ALTER TABLE memeEntries
-        ADD CONSTRAINT uniqueMemeParams UNIQUE(caption, imageURL);`, 
+        ADD CONSTRAINT uniqueMemeParams UNIQUE(caption, url);`, 
         (err, res) => {
             console.log(err, res);
         }
@@ -74,7 +74,7 @@ async function insertMeme(username, caption, imageURL) {
         await client.connect();
 
         let result = await client.query(
-            `INSERT INTO memeEntries (username, caption, imageURL) 
+            `INSERT INTO memeEntries (name, caption, url) 
             VALUES ('${username}', '${caption}', '${imageURL}') 
             RETURNING ID;`);
         return (result.rows[0]);
@@ -86,7 +86,7 @@ async function insertMeme(username, caption, imageURL) {
 }
 
 // USAGE AS:
-// insertMeme('name', 'caption', 'validURL').then(now => console.log(now));
+// insertMeme('Rick Astley', 'Never Gonna Give You Up', 'https://nerdist.com/wp-content/uploads/2020/07/maxresdefault.jpg').then(ret => console.log(ret));
 
 
 /*  GET @ /memes/<id>
@@ -110,10 +110,10 @@ async function getMeme(id) {
 }
 
 // USAGE AS:
-// getMeme('1').then(now => console.log(now));
+// getMeme('1').then(ret => console.log(ret));
 
 
-/*  GET @ /memes/
+/*  GET @ /memes
     excpects null
     returns all information for latest 100 POST requests (entire row)
 */
@@ -135,7 +135,7 @@ async function get100LatestPOST() {
 }
 
 // USAGE AS:
-// get100LatestPOST().then(now => console.log(now));
+// get100LatestPOST().then(ret => console.log(ret));
 
 
 
@@ -161,7 +161,7 @@ async function getMostActive(modifiedLimit) {
 }
 
 // USAGE AS:
-// getMostActive(10).then(now => console.log(now));
+// getMostActive(10).then(ret => console.log(ret));
 
 
 /*  GET @ /memes/newest/<limit>
@@ -186,13 +186,14 @@ async function getNewest(idLimit) {
 }
 
 // USAGE AS:
-// getNewest(10).then(now => console.log(now));
+// getNewest(10).then(ret => console.log(ret));
 
 
-/*  GET @ /memes/next/<id>
+/*  GET @ /memes/prev/<id>
     excpects valid id or empty field
     if id is an invalid integer, handles accordingly
     returns first row or previous row (displayed as next) depending on the parameter
+    returns undefined if the first id is passed
     UNIT Pagination
 */
 
@@ -226,12 +227,49 @@ async function getPrevious(offset) {
 }
 
 // USAGE AS:
-// getPrevious(42).then(now => console.log(now));
+// getPrevious(0).then(ret => console.log(ret));
+
+
+/*  GET @ /memes/next/<id>
+    excpects valid id or empty field
+    if id is an invalid integer, handles accordingly
+    returns last row or next row (displayed as previous) depending on the parameter
+    returns undefined if the last id is passed
+    UNIT Pagination
+*/
+
+async function getNext(offset) {
+    const client = new Client(connectionString);
+    try {
+        
+        if ( offset == null || offset.length === 0 ) {
+            let result = await client.query(
+                `SELECT * FROM memeEntries 
+                FETCH FIRST ROW ONLY;`
+            );
+            return (result.rows[0]);
+        } else {
+            await client.connect();
+            let result = await client.query(
+                `SELECT * FROM memeEntries WHERE id > ${offset}
+                ORDER BY id ASC LIMIT 1 ;`
+            );
+            return (result.rows[0]);
+        }
+    } catch(err) {
+        return err.stack;
+    } finally {
+        client.end();
+    }
+}
+
+// USAGE AS:
+getNext(4).then(ret => console.log(ret));
 
 
 /*  PATCH @ /memes/<id>
     excpects valid id
-    will also take up new values for the username, caption, imageURL
+    will also take up new values for the name, caption, url
     returns error stack on error, result otherwise
 */
 
@@ -241,9 +279,9 @@ async function patchField(id, username, caption, imageURL) {
         await client.connect();
         let result = await client.query(
             `UPDATE memeEntries
-            SET username = '${username}', 
+            SET name = '${username}', 
                 caption = '${caption}',
-                imageURL = '${imageURL}'
+                url = '${imageURL}'
             WHERE id = ${id};`);
         return (result);
     } catch(err) {
@@ -254,7 +292,7 @@ async function patchField(id, username, caption, imageURL) {
 }
 
 // USAGE AS:
-// patchField(1, 'hi', 'there', 'mister').then(now => console.log(now));
+// patchField(1, 'hi', 'there', 'mister').then(ret => console.log(ret));
 
 
 /*  PATCH @/memes/<id>
@@ -281,7 +319,7 @@ async function incrementLike(id) {
 }
 
 // USAGE AS:
-// incrementLike(1).then(now => console.log(now));
+// incrementLike(1).then(ret => console.log(ret));
 
 
 /*  Uncomment the following to check that DB is properly connected
@@ -294,5 +332,5 @@ async function incrementLike(id) {
 // exporting the functions for further usage, in server.js
 module.exports = {
     initTable, insertMeme, getMeme, get100LatestPOST, getPrevious,
-    getMostActive, getNewest, patchField, incrementLike
+    getNext, getMostActive, getNewest, patchField, incrementLike
 };

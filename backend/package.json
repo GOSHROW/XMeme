@@ -9,6 +9,7 @@
   "author": "GOSHROW <goshrow@gmail.com>",
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "express": "^4.17.1",
     "heroku": "^7.47.12",
     "pg": "^8.5.1"
   }
