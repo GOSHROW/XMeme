@@ -1,18 +1,21 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 3000;
+app.use(cors())
 
 const dbops = require('./dbops');
 const validateFields = require('./validateFields');
 
-dbops.initTable(); 
+// dbops.initTable(); 
 // sets up a postgresql table for further api calls to act upon
 
 
-/*  GET /memes endpoin
+/*  GET /memes endpoint
     no request properties
     responds 200 on success, with 100 memes in given format 
-    responds 404 on failure in resolving the request
+    responds 500 on failure since get100latestPOST can typically
+     only suffer failure on behalf of the server's errors
 */
 
 app.get('/memes', (req, res) => {
@@ -22,7 +25,7 @@ app.get('/memes', (req, res) => {
             return;
         });
     } catch {
-        res.send(404);
+        res.send(500);
         return;
     }
 });

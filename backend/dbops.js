@@ -39,7 +39,7 @@ function initTable() {
             likes INTEGER DEFAULT 0,
             modified TIMESTAMP DEFAULT NOW());
         
-        CREATE FUNCTION update_modified() RETURNS trigger
+        CREATE OR REPLACE FUNCTION update_modified() RETURNS trigger
             LANGUAGE plpgsql
             AS $$
         BEGIN
@@ -124,7 +124,7 @@ async function get100LatestPOST() {
         await client.connect();
 
         let result = await client.query(
-            `SELECT * FROM memeEntries
+            `SELECT id, name, caption, url FROM memeEntries
             ORDER BY id DESC LIMIT 100 `);
         return (result.rows);
     } catch(err) {
@@ -264,7 +264,7 @@ async function getNext(offset) {
 }
 
 // USAGE AS:
-getNext(4).then(ret => console.log(ret));
+// getNext(4).then(ret => console.log(ret));
 
 
 /*  PATCH @ /memes/<id>
