@@ -20,8 +20,8 @@ body {
 
 #right-cntr{
     width: 50vw;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 5% 100%);
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 5% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     background-color: #282a36;
     text-align: center;
 }
@@ -270,4 +270,26 @@ body {
 }
 #meme-img {
     width: 70%;
+}
+
+@media screen and (max-width: 1000px) {
+    #meme-img {
+        width: 100%;
+    }
+    #curr-caption {
+        font-size: large;
+        font-weight: 600;
+    }
+    #curr-likes-btn, #curr-likes-cntr, #curr-edit {
+        font-size: 25px;
+    }
+    #meme-nav {
+        font-size: 40px;
+    }
+    #left-ptr:active {
+        font-size: 50px;
+    }
+    #right-ptr:active {
+        font-size: 50px;
+    }
 }
