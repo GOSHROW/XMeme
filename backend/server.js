@@ -17,17 +17,8 @@ dbops.initTable();
 
 app.get('/memes', (req, res) => {
     try {
-        dbops.get100LatestPOST().then(latest100 => {
-            // removing and modifying return fields as requisite
-            for (var elt = 0; elt < latest100.length; elt++) {
-                delete latest100[elt]["modified"];
-                delete latest100[elt]["likes"];
-                latest100[elt]["url"] = latest100[elt]["imageURL"];
-                delete latest100[elt]["imageURL"];
-                latest100[elt]["name"] = latest100[elt]["username"];
-                delete latest100[elt]["username"];
-            }
-            res.send(latest100);
+        dbops.get100LatestPOST().then(ret => {
+            res.send(ret);
             return;
         });
     } catch {

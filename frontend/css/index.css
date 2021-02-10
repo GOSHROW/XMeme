@@ -168,3 +168,110 @@ body {
     box-shadow: 0 5px goldenrod;
     transform: translateY(4px);
 }
+
+#meme {
+    padding-top: 10%;
+}
+
+#meme-nav {
+    font-size: 64px;
+}
+
+#left-ptr {
+    background: linear-gradient(to right, orange, red);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#right-ptr {
+    background: linear-gradient(to left, orange, red);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#left-ptr:hover {
+    background: linear-gradient(to right, orangered, red);    
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+}
+#right-ptr:hover {
+    background: linear-gradient(to left, orangered, red);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+}
+
+#left-ptr:active {
+    font-size: 72px;
+}
+
+#right-ptr:active {
+    font-size: 72px;
+}
+
+#curr-likes-btn {
+    outline: none;
+    font-size: 40px;
+    font-weight: bolder;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    background-image: linear-gradient(to right, darkgrey, lightgrey);
+}
+#curr-likes-btn[liked="true"]  {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    background-image: linear-gradient(to right, red, orangered);
+}
+#curr-likes-btn[liked="false"]:hover {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    background-image: linear-gradient(to right, red, grey);
+}
+
+#curr-likes-cntr {
+    font-size: 40px;
+    top: calc(50% - 20px);
+    /* border: #f12b4a 10px solid; */
+}
+
+#curr-edit {
+    font-size: 40px;
+    outline: none;
+    background-image: linear-gradient(to right, #222222, #282a36);
+    color: #f8f8f2;
+    font-weight: bold;
+    box-shadow: none;
+    cursor: pointer;
+    padding: 10px;
+}
+#curr-edit:active {
+    background-image: linear-gradient(to left, #222222, #282a36);
+}
+
+#curr-caption {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: x-large;
+    font-weight: 700;
+}
+#curr-name {
+    font-size: medium;
+    font-style: italic;
+}
+#meme-img {
+    width: 70%;
+}
+
+@media screen and (max-width: ) {
+
+}
