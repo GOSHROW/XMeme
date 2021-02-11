@@ -64,7 +64,6 @@ function initTable() {
 
 /*  POST @ /memes
     excpects validated data
-    TODO: validate all params
     returns a key-value pair (dict) JSON for successfully posted meme
 */
 

@@ -2,10 +2,31 @@ body {
     background-image: linear-gradient(to right, black, blueviolet, black);
     color: #f1f1a3;
     font-size: 24px;
+    margin: 0 0 0 0;
+}
+
+body::-webkit-scrollbar {
+    width: 7px;
+}
+
+body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px black;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: blueviolet;
+    outline: 3px solid blueviolet;
+}
+
+#bg-pattern {
+    background-image: linear-gradient(black 1px, transparent 1px), linear-gradient(to right, rgb(65, 31, 97) 1px, transparent 1px);
+    background-size: 10px 10px;
+    display: inline-block;  
 }
 
 #memes-section {
-    background-image: linear-gradient(to right, darkred, orangered, orange, goldenrod);
+    background-image: radial-gradient(red 3px,  transparent 1px);
+    background-size: calc(10 * 1px) calc(10 * 1px);
     margin: auto;
     width: 70%;
     padding: 0 10px;

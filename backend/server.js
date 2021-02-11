@@ -37,7 +37,7 @@ app.get('/memes', (req, res) => {
     }
 });
 
-/*  GET /memes endpoint
+/*  GET /memes/trendy endpoint
     no request properties
     responds 200 on success, with 100 memes in given format 
     responds 500 on failure since get100latestPOST can typically
@@ -46,7 +46,7 @@ app.get('/memes', (req, res) => {
 
 app.get('/memes/trendy', (req, res) => {
     try {
-        dbops.getMostActive(100).then(ret => {
+        dbops.getMostActive(10).then(ret => {
             res.send(ret);
             return;
         });
@@ -83,6 +83,92 @@ app.get('/memes/:id', (req, res) => {
         res.sendStatus(500);
     }
 });
+
+/*  GET /memes/newest/<limit> endpoint
+    responds 200 on success with requisite fields as a JSON
+    responds 404 if the endpoint could not be resolved
+    responds 406 if limit parameter is illegal
+    responds 500 for other cases that may be the fault of the server
+    Will help in paginating the recent requests. To provide some pagination.
+*/
+
+app.get('/memes/newest/:limit', (req, res) => {
+    try {
+        const limit = req.params.limit
+        var numbers = /^[0-9]+$/;
+        if (numbers.test(limit)) {
+            dbops.getNewest(limit).then(ret => {
+                if (ret) {
+                    res.send(ret);
+                } else {
+                    res.sendStatus(404);
+                }
+            });
+        } else {
+            res.sendStatus(406) 
+            // Non-Digit values lead to exceptions at DB implementation stage
+        }
+    } catch(err) {
+        res.sendStatus(500);
+    }
+});
+
+/*  GET /memes/prev/<offset> endpoint
+    responds 200 on success with requisite fields as a JSON
+    responds 404 if the endpoint could not be resolved
+    responds 406 if offset parameter is illegal
+    responds 500 for other cases that may be the fault of the server
+    Used in index page for unit pagination
+*/
+
+app.get('/memes/prev/:offset', (req, res) => {
+    try {
+        const offset = req.params.offset
+        var numbers = /^[0-9]+$/
+        if (numbers.test(offset) || offset.length == 0 || offset == null) {
+            dbops.getPrevious(offset).then(ret => {
+                if (ret) {
+                    res.send(ret);
+                } else {
+                    res.sendStatus(404);
+                }
+            });
+        } else {
+            res.sendStatus(406)
+        }
+    } catch(err) {
+        res.sendStatus(500);
+    }
+});
+
+/*  GET /memes/next/<offset> endpoint
+    responds 200 on success with requisite fields as a JSON
+    responds 404 if the endpoint could not be resolved
+    responds 406 if offset parameter is illegal
+    responds 500 for other cases that may be the fault of the server
+    Used in index page for unit pagination
+*/
+
+app.get('/memes/next/:offset', (req, res) => {
+    try {
+        const offset = req.params.offset
+        var numbers = /^[0-9]+$/
+        if (numbers.test(offset) || offset.length == 0 || offset == null) {
+            dbops.getNext(offset).then(ret => {
+                if (ret) {
+                    res.send(ret);
+                } else {
+                    res.sendStatus(404);
+                }
+            });
+        } else {
+            res.sendStatus(406)
+        }
+    } catch(err) {
+        res.sendStatus(500);
+    }
+});
+
 
 /*  POST /memes endpoint
     responds 200 and returns id of newly added meme on success
