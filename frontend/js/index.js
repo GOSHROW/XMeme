@@ -32,6 +32,28 @@ function postMeme() {
     setLatest();
 }
 
+function beautifiedTime(iso8061) {
+    var timestamp = new Date(iso8061);
+    var now = new Date();
+    var units = {
+        year  : 24 * 60 * 60 * 1000 * 365,
+        month : 24 * 60 * 60 * 1000 * 365/12,
+        day   : 24 * 60 * 60 * 1000,
+        hour  : 60 * 60 * 1000,
+        minute: 60 * 1000,
+        second: 1000
+    }
+    var rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
+    var getRelativeTime = (d1, d2 = new Date()) => {
+        var elapsed = d1 - d2
+        
+        for (var u in units) 
+            if (Math.abs(elapsed) > units[u] || u == 'second') 
+                return rtf.format(Math.round(elapsed/units[u]), u)
+    }
+    return getRelativeTime(now, timestamp);
+}
+
 async function setLatest() {
     resJSON  = await fetch(backend + "memes/newest/1")
         .then(res => res.json())
@@ -41,7 +63,7 @@ async function setLatest() {
     document.getElementById("curr-name").innerHTML = resJSON["name"]
     document.getElementById("meme-img").src = resJSON["url"]
     document.getElementById("curr-id").innerHTML = resJSON["id"]
-    document.getElementById("curr-time").innerHTML = resJSON["modified"]
+    document.getElementById("curr-time").innerHTML = beautifiedTime(resJSON["modified"])
     document.getElementById("curr-likes-cntr").innerHTML = resJSON["likes"]
 }
 
@@ -55,7 +77,7 @@ async function getPrevious() {
     document.getElementById("curr-name").innerHTML = resJSON["name"]
     document.getElementById("meme-img").src = resJSON["url"]
     document.getElementById("curr-id").innerHTML = resJSON["id"]
-    document.getElementById("curr-time").innerHTML = resJSON["modified"]
+    document.getElementById("curr-time").innerHTML = beautifiedTime(resJSON["modified"])
     document.getElementById("curr-likes-cntr").innerHTML = resJSON["likes"]
 }
 
@@ -69,7 +91,7 @@ async function getNext() {
     document.getElementById("curr-name").innerHTML = resJSON["name"]
     document.getElementById("meme-img").src = resJSON["url"]
     document.getElementById("curr-id").innerHTML = resJSON["id"]
-    document.getElementById("curr-time").innerHTML = resJSON["modified"]
+    document.getElementById("curr-time").innerHTML = beautifiedTime(resJSON["modified"])
     document.getElementById("curr-likes-cntr").innerHTML = resJSON["likes"]
 }
 
