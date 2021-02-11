@@ -9,6 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>xMEME | GOSHROW</title>
         <meta name="description" content="">
+        <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./css/index.css">
     </head>
@@ -18,25 +19,25 @@
         <![endif]-->
         <div id="main-cntr">
             <div id="left-cntr">
-                <div class="form__group">
+                <form class="form__group">
                     <div class="form__section">
-                        <input type="input" autocomplete="off" class="form__field" name="name" placeholder="Name" id='name' required />
+                        <input type="input" autocomplete="off" class="form__field" name="name" pattern="^[ \.a-zA-Z0-9-_]+$" placeholder="Name" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Use alphanumeric characters, space, period, hyphen or underscore')" id='name' required />
                         <label for="name" class="form__label">Name</label>
                     </div>
                     <div class="form__section">
-                        <input type="input" autocomplete="off" class="form__field" name="caption" placeholder="Caption" id='caption' required />
+                        <input type="input" autocomplete="off" class="form__field" name="caption" pattern="^[ \.a-zA-Z0-9-_]+$" placeholder="Caption" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Use alphanumeric characters, space, period, hyphen or underscore')"  id='caption' required />
                         <label for="caption" class="form__label">Caption</label>
                     </div>
                     <div class="form__section">
-                        <input type="input" autocomplete="off" class="form__field" name="url" placeholder="Image URL" id='url' required />
+                        <input type="url" autocomplete="off" class="form__field" name="url" placeholder="Image URL" id='url' onblur="checkURL(this)" required />
                         <label for="url" class="form__label">ImageURL</label>
                     </div>
                     <div class="form__section">
-                        <button class="btn draw__border" id="post">
+                        <button type="submit" class="btn draw__border" id="post" onclick="postMeme()">
                             <span>I am a MEME(r)</span> 
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
             <div id="right-cntr">
                 <div id="meme">

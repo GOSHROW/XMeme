@@ -37,6 +37,25 @@ app.get('/memes', (req, res) => {
     }
 });
 
+/*  GET /memes endpoint
+    no request properties
+    responds 200 on success, with 100 memes in given format 
+    responds 500 on failure since get100latestPOST can typically
+     only suffer failure on behalf of the server's errors
+*/
+
+app.get('/memes/trendy', (req, res) => {
+    try {
+        dbops.getMostActive(100).then(ret => {
+            res.send(ret);
+            return;
+        });
+    } catch(err) {
+        res.sendStatus(500);
+        return;
+    }
+});
+
 /*  GET /memes/<id> endpoint
     responds 200 on success with requisite fields as a JSON
     responds 404 if id parameter does not resolve to a valid id
@@ -108,6 +127,8 @@ app.post('/memes', (req, res) => {
         res.sendStatus(500);
     }
 });
+
+
 
 app.listen(port, () =>
   console.log(`xMeme backend listening on port ${port}`),
