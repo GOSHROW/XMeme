@@ -86,7 +86,7 @@ async function insertMeme(username, caption, imageURL) {
 }
 
 // USAGE AS:
-// insertMeme('Rick Astley', 'Never Gonna Give You Up', 'https://nerdist.com/wp-content/uploads/2020/07/maxresdefault.jpg').then(ret => console.log(ret));
+// insertMeme('Rick Astley', 'Never Gonna Let You Down', 'https://nerdist.com/wp-content/uploads/2020/07/maxresdefault.jpg').then(ret => console.log(ret.id));
 
 
 /*  GET @ /memes/<id>

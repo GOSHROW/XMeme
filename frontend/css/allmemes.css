@@ -1,7 +1,106 @@
 body {
-    background-color: #002b36;
+    background-image: linear-gradient(to right, black, blueviolet, black);
+    color: #f1f1a3;
+    font-size: 24px;
 }
 
-#card {
-    background-color: #073642;;
+#memes-section {
+    background-image: linear-gradient(to right, darkred, orangered, orange, goldenrod);
+    margin: auto;
+    width: 70%;
+    padding: 0 10px;
+    border-radius: 10%;
+}
+
+.meme-card {
+    background-image: linear-gradient(to left, #2c3531, #1c2521, #0c1511, #000);
+    margin: auto;
+    width: 75%;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    border-bottom: 5px solid grey;
+    border-top: 5px solid teal;
+    margin-top: 15px;
+}
+
+blockquote {
+    font-family: Georgia, serif;
+    font-size: 36px;
+    font-style: italic;
+    margin: 0.25em 0;
+    padding: 0.35em 40px;
+    line-height: 1.45;
+    position: relative;
+}
+
+blockquote:before {
+    display: block;
+    padding-left: 10px;
+    content: "\201C";
+    font-size: 80px;
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    color: #7a7a7a;
+}
+
+blockquote cite {
+    color: #999999;
+    font-size: 20px;
+    display: block;
+    margin-top: 5px;
+}
+    
+blockquote cite:before {
+    content: "\2014 \2009";
+}
+
+.meme-caption {
+    width: 60%;
+    left: 20%;
+    text-align: justify;
+}
+
+.meme-img {
+    width: 80%;
+}
+
+@media screen and (max-width : 2600px) {
+    .meme-card {
+        width: 90%;
+    }
+    #memes-section {
+        border-radius: 2%;
+    }
+}
+
+@media screen and (max-width : 1500px) {
+    .meme-img {
+        width: 95%;
+    }
+    .meme-card {
+        width: 95%;
+    }
+    #memes-section {
+        border: none;
+        padding: 0%;
+        background-image: none;
+    }
+    body {
+        background-image: linear-gradient(to right, black, #222, black);
+    }
+    blockquote {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width : 900px) {
+    #memes-section {
+        all:unset;
+    }
+    .meme-card {
+        padding: 0%;
+        width: 95%;
+    }
 }
