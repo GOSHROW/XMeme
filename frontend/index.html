@@ -21,15 +21,15 @@
             <div id="left-cntr">
                 <form class="form__group">
                     <div class="form__section">
-                        <input type="input" autocomplete="off" class="form__field" name="name" pattern="^[ \.a-zA-Z0-9-_]+$" placeholder="Name" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Use alphanumeric characters, space, period, hyphen or underscore')" id='name' required />
+                        <input type="input" autocomplete="off" class="form__field" name="name" pattern="^[ \.a-zA-Z0-9-_']+$" placeholder="Name" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Use alphanumeric characters, space, period, hyphen, apostrophe or underscore')" id='name' required />
                         <label for="name" class="form__label">Name</label>
                     </div>
                     <div class="form__section">
-                        <input type="input" autocomplete="off" class="form__field" name="caption" pattern="^[ \.a-zA-Z0-9-_]+$" placeholder="Caption" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Use alphanumeric characters, space, period, hyphen or underscore')"  id='caption' required />
+                        <input type="input" autocomplete="off" class="form__field" name="caption" pattern="^[ \.a-zA-Z0-9-_']+$" placeholder="Caption" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Use alphanumeric characters, space, period, hyphen, apostrophe or underscore')"  id='caption' required />
                         <label for="caption" class="form__label">Caption</label>
                     </div>
                     <div class="form__section">
-                        <input type="url" autocomplete="off" class="form__field" name="url" placeholder="Image URL" id='url' onblur="checkURL(this)" required />
+                        <input type="url" autocomplete="off" class="form__field" name="url" placeholder="Image URL" id='url' onblur="addHTTP(this)" required />
                         <label for="url" class="form__label">ImageURL</label>
                     </div>
                     <div class="form__section">
@@ -42,16 +42,26 @@
             <div id="right-cntr">
                 <div id="meme">
                     <div id="curr-meme">
+                        <div id="curr-id" style="display: none;">
+                        </div>
                         <div id="curr-caption">
                             NEVER GONNA GIVE YOU UP
                         </div>
                         <br/><br/>
                         <div id="curr-img">
-                            <img src="assets/meme404.jpg" id="meme-img"/>
+                            <img src="assets/meme404.jpg" id="meme-img" onerror="this.src='assets/meme404.jpg'"/>
                         </div>
                         <br/>
-                        <div id="curr-name">
-                            NEVER GONNA LET YOU DOWN
+                        <div>
+                            ~
+                            <span id="curr-name">
+                                NEVER GONNA LET YOU DOWN
+                            </span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            : 
+                            <span id="curr-time">
+                                NEVER
+                            </span>
                         </div>
                         <br/><br/>
                         <div id="curr-options">
@@ -69,8 +79,8 @@
                     </div>
                         <br/>
                     <div id="meme-nav">
-                        <span id="left-ptr">&#8617;</span>
-                        <span id="right-ptr">&#8618;</span>
+                        <span id="left-ptr" onclick="getPrevious()">&#8617;</span>
+                        <span id="right-ptr" onclick="getNext()">&#8618;</span>
                     </div>
                 </div>
             </div>

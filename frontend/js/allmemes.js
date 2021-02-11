@@ -10,6 +10,9 @@ async function get100memes() {
     })
     .then(res => {
         return res;
+    })
+    .catch(err => {
+        console.error(err);
     });
     return ret;
 }

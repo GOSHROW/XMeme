@@ -123,9 +123,14 @@ app.get('/memes/newest/:limit', (req, res) => {
 
 app.get('/memes/prev/:offset', (req, res) => {
     try {
-        const offset = req.params.offset
+        var offset
+        if (req.params.offset) {
+            offset = req.params.offset
+        } else {
+            offset = ""
+        }
         var numbers = /^[0-9]+$/
-        if (numbers.test(offset) || offset.length == 0 || offset == null) {
+        if (numbers.test(offset)) {
             dbops.getPrevious(offset).then(ret => {
                 if (ret) {
                     res.send(ret);
@@ -151,9 +156,9 @@ app.get('/memes/prev/:offset', (req, res) => {
 
 app.get('/memes/next/:offset', (req, res) => {
     try {
-        const offset = req.params.offset
+        var offset = req.params.offset
         var numbers = /^[0-9]+$/
-        if (numbers.test(offset) || offset.length == 0 || offset == null) {
+        if (numbers.test(offset)) {
             dbops.getNext(offset).then(ret => {
                 if (ret) {
                     res.send(ret);
@@ -213,7 +218,6 @@ app.post('/memes', (req, res) => {
         res.sendStatus(500);
     }
 });
-
 
 
 app.listen(port, () =>
