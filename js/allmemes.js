@@ -18,12 +18,13 @@ function appendMeme(memeJSON) {
     var toAppend = document.getElementById("memes-section")
     toAppend.innerHTML += 
     `<div class="meme-card">
-        <div class="meme-name">
-            ${memeJSON.name}
-        </div>
-        <div class="meme-caption">
+        <blockquote class="meme-caption">
             ${memeJSON.caption}
-        </div>
+            <cite class="meme-name">
+                ${memeJSON.name}
+            </cite>
+        </blockquote>
+        <br/>
         <img class="meme-img" src="${memeJSON.url}" alt="Meme at ${memeJSON.id}" 
         onerror="this.src='assets/meme404.jpg'">
     </div>
@@ -35,6 +36,7 @@ async function main() {
     .then(memesJSON => {
         return memesJSON;
     });
+    console.log(memeArray);
     for (var index = 0; index < memeArray.length; index++) {
         appendMeme(memeArray[index]);
     }
