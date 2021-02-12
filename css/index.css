@@ -172,7 +172,7 @@ body {
 }
 
 #meme {
-    padding-top: 1%;
+    padding-top: 10%;
 }
 
 #meme-nav {
@@ -248,7 +248,7 @@ body {
 }
 
 #curr-edit {
-    font-size: 40px;
+    font-size: 30px;
     outline: none;
     background-image: linear-gradient(to right, #000, #111);
     color: #f8f8f2;

@@ -32,6 +32,38 @@ function postMeme() {
     setLatest();
 }
 
+function setJSONToHTML(resJSON) {
+    document.getElementById("curr-caption").innerHTML = resJSON["caption"]
+    document.getElementById("curr-name").innerHTML = resJSON["name"]
+    document.getElementById("meme-img").src = resJSON["url"]
+    document.getElementById("curr-id").innerHTML = resJSON["id"]
+    document.getElementById("curr-time").innerHTML = beautifiedTime(resJSON["modified"])
+    document.getElementById("curr-likes-cntr").innerHTML = resJSON["likes"]
+    document.getElementById("curr-likes-btn").setAttribute("liked", (localStorage.getItem("like" + resJSON["id"]) == "1") ? "true" : "false");
+}
+
+async function sendLike() {
+    const currid = document.getElementById("curr-id").innerHTML.trim();
+    var likeorigin = document.getElementById("curr-likes-btn");
+    if (likeorigin.getAttribute("liked") == "true") {
+        console.log("ALREADY LIKED")
+        return;
+    } else {
+        localStorage.setItem("like" + currid, "1");  
+        likeorigin.liked = "true";
+        resJSON  = await fetch(backend + "memes/likes/" + currid, {
+            method: "PATCH"
+        }).then(res => res.json())
+        .then(ret => {
+            document.getElementById("curr-likes-btn").setAttribute("liked", (localStorage.getItem("like" + currid) == "1") ? "true" : "false");
+            // console.log(currid + "liked" + localStorage.getItem("like" + currid));
+            return ret;
+        })
+        .catch(err => console.error(err));
+        document.getElementById("curr-likes-cntr").innerHTML = Number(document.getElementById("curr-likes-cntr").innerHTML) + 1;
+    }
+}
+
 function beautifiedTime(iso8061) {
     var timestamp = new Date(iso8061);
     var now = new Date();
@@ -57,42 +89,33 @@ function beautifiedTime(iso8061) {
 async function setLatest() {
     resJSON  = await fetch(backend + "memes/newest/1")
         .then(res => res.json())
-        .then(ret => {return ret[0];})
-        .catch(err => console.error(err))
-    document.getElementById("curr-caption").innerHTML = resJSON["caption"]
-    document.getElementById("curr-name").innerHTML = resJSON["name"]
-    document.getElementById("meme-img").src = resJSON["url"]
-    document.getElementById("curr-id").innerHTML = resJSON["id"]
-    document.getElementById("curr-time").innerHTML = beautifiedTime(resJSON["modified"])
-    document.getElementById("curr-likes-cntr").innerHTML = resJSON["likes"]
+        .then(ret => {
+            setJSONToHTML(ret[0]);
+            return ret[0];
+        })
+        .catch(err => console.error(err));
 }
 
 async function getPrevious() {
     var currid = document.getElementById("curr-id").innerHTML;
     resJSON  = await fetch(backend + "memes/prev/" + currid)
         .then(res => res.json())
-        .then(ret => {return ret;})
+        .then(ret => {
+            setJSONToHTML(ret);
+            return ret;
+        })
         .catch(err => console.error(err));
-    document.getElementById("curr-caption").innerHTML = resJSON["caption"]
-    document.getElementById("curr-name").innerHTML = resJSON["name"]
-    document.getElementById("meme-img").src = resJSON["url"]
-    document.getElementById("curr-id").innerHTML = resJSON["id"]
-    document.getElementById("curr-time").innerHTML = beautifiedTime(resJSON["modified"])
-    document.getElementById("curr-likes-cntr").innerHTML = resJSON["likes"]
 }
 
 async function getNext() {
     var currid = document.getElementById("curr-id").innerHTML;
     resJSON  = await fetch(backend + "memes/next/" + currid)
         .then(res => res.json())
-        .then(ret => {return ret;})
-        .catch(err => console.error(err))
-    document.getElementById("curr-caption").innerHTML = resJSON["caption"]
-    document.getElementById("curr-name").innerHTML = resJSON["name"]
-    document.getElementById("meme-img").src = resJSON["url"]
-    document.getElementById("curr-id").innerHTML = resJSON["id"]
-    document.getElementById("curr-time").innerHTML = beautifiedTime(resJSON["modified"])
-    document.getElementById("curr-likes-cntr").innerHTML = resJSON["likes"]
+        .then(ret => {
+            setJSONToHTML(ret);
+            return ret;
+        })
+        .catch(err => console.error(err));
 }
 
 setLatest();
