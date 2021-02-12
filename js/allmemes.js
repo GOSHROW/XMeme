@@ -1,6 +1,6 @@
 /*  makes the GET /memes API call to backend and returns JSON
 */
-const backendURL = "http://localhost:3000/";
+const backendURL = "http://localhost:8081/";
 
 async function get100memes() {
     let url = backendURL + "memes";
@@ -12,7 +12,7 @@ async function get100memes() {
         return res;
     })
     .catch(err => {
-        console.error(err);
+        // console.error(err);
     });
     return ret;
 }
@@ -28,7 +28,7 @@ function appendMeme(memeJSON) {
             </cite>
         </blockquote>
         <br/>
-        <img class="meme-img" src="${memeJSON.url}" alt="Meme at ${memeJSON.id}" 
+        <img class="meme-img" alt="Current Meme Image" src="${memeJSON.url}" alt="Meme at ${memeJSON.id}" 
         onerror="this.src='assets/meme404.jpg'">
     </div>
     `

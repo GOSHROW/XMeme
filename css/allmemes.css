@@ -5,6 +5,8 @@ body {
     margin: 0 0 0 0;
 }
 
+/* Scroll Bar Designs if permitted */
+
 body::-webkit-scrollbar {
     width: 7px;
 }
@@ -17,6 +19,8 @@ body::-webkit-scrollbar-thumb {
     background-color: blueviolet;
     outline: 3px solid blueviolet;
 }
+
+/* General Pattern laced layout */
 
 #bg-pattern {
     background-image: linear-gradient(black 1px, transparent 1px), linear-gradient(to right, rgb(65, 31, 97) 1px, transparent 1px);
@@ -44,6 +48,8 @@ body::-webkit-scrollbar-thumb {
     border-top: 5px solid teal;
     margin-top: 15px;
 }
+
+/* for captions and OP name */
 
 blockquote {
     font-family: Georgia, serif;
@@ -77,6 +83,8 @@ blockquote cite:before {
     content: "\2014 \2009";
 }
 
+/* meme components */
+
 .meme-caption {
     width: 60%;
     left: 20%;
@@ -87,6 +95,8 @@ blockquote cite:before {
     width: 60%;
     max-height: 80vh;
 }
+
+/* Responiveness measures */
 
 @media screen and (max-width : 2600px) {
     .meme-card {
@@ -125,4 +135,42 @@ blockquote cite:before {
         padding: 0%;
         width: 95%;
     }
+}
+
+/* Floating widget designs */
+
+#my-float-1{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:transparent;
+	text-align: center;
+    cursor: pointer;
+}
+#my-float-2{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:105px;
+	right:40px;
+	background-color:transparent;
+	text-align: center;
+    cursor: pointer;
+}
+
+/* hiding skip links */
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000000;
+    color: white;
+    padding: 8px;
+    z-index: 100;
+}
+.skip-link:focus {
+    top: 0;
 }
