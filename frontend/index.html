@@ -3,12 +3,12 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>xMEME | GOSHROW</title>
-        <meta name="description" content="">
+        <meta name="description" content="Create xMemes and get to influence the meme trends">
         <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./css/index.css">
@@ -17,7 +17,8 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div id="main-cntr">
+        <a class="skip-link" href="#main-cntr">Skip to main</a>
+        <main id="main-cntr">
             <div id="left-cntr">
                 <form class="form__group">
                     <div class="form__section">
@@ -68,7 +69,7 @@
                             </span>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <span id="curr-edit" class="container">
-                                <a data-modal="modal-one">EDIT</a>
+                                <a aria-label="edit" data-modal="modal-one" href="#">EDIT</a>
                             </span>
                         </div>
                         <br/>
@@ -78,7 +79,7 @@
                         </div>
                         <br/><br/>
                         <div id="curr-img">
-                            <img src="assets/meme404.jpg" id="meme-img" onerror="this.src='assets/meme404.jpg'"/>
+                            <img src="assets/meme404.jpg" id="meme-img" alt="Current Meme Image" onerror="this.src='assets/meme404.jpg'"/>
                         </div>
                     </div>
                 </div>
@@ -103,8 +104,13 @@
                     </form>
                 </div>
             </div>
-        </div>
-        
+        </main>
+        <a aria-label="trending" href="./trending.html"  id="my-float-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#ff4500"><!-- Font Awesome Free 5.15.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M216 23.86c0-23.8-30.65-32.77-44.15-13.04C48 191.85 224 200 224 288c0 35.63-29.11 64.46-64.85 63.99-35.17-.45-63.15-29.77-63.15-64.94v-85.51c0-21.7-26.47-32.23-41.43-16.5C27.8 213.16 0 261.33 0 320c0 105.87 86.13 192 192 192s192-86.13 192-192c0-170.29-168-193-168-296.14z"/></svg>
+        </a>
+        <a aria-label="allmemes" href="./allmemes.html"  id="my-float-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#4500ff"><!-- Font Awesome Free 5.15.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
+        </a>
         <script src="./js/index.js" async defer></script>
     </body>
 </html>

@@ -5,6 +5,8 @@ body {
     color: #f8f8f2;
 }
 
+/* Top Level Containers for the Sections */
+
 #main-cntr{
     width: 100vw;
     height: 100vh;
@@ -28,10 +30,11 @@ body {
     text-align: center;
 }
 
+/* Form stylings, both for the POST and PATCH action interfaces. */
+
 .form__group {
     padding-left: 10%;
 }
-
 
 .form__section {
     position: relative;
@@ -111,7 +114,7 @@ body {
     box-shadow: none;
 }
 
-
+/* Submit button animation */
 
 .draw__border {
     box-shadow: inset 0 0 0 4px #007cc7;
@@ -171,9 +174,13 @@ body {
     transform: translateY(4px);
 }
 
+/* Right Container UI */
+
 #meme {
     padding-top: 3%;
 }
+
+/* Navigation between memes */
 
 #meme-nav {
     font-size: 64px;
@@ -216,6 +223,8 @@ body {
     font-size: 72px;
 }
 
+/* Like UI */
+
 #curr-likes-btn {
     outline: none;
     font-size: 40px;
@@ -247,6 +256,8 @@ body {
     /* border: #f12b4a 10px solid; */
 }
 
+/* Edit Meme designs */
+
 #curr-edit {
     font-size: 30px;
     outline: none;
@@ -261,6 +272,8 @@ body {
 #curr-edit:active {
     background-image: linear-gradient(to left, #000, #111);
 }
+
+/* Other Meme Components  */
 
 #curr-caption {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -281,6 +294,8 @@ body {
     width: 70%;
     max-height: 60vh;
 }
+
+/* Responsiveness Measures */
 
 @media screen and (max-width: 1000px) {
     #meme-img {
@@ -304,6 +319,7 @@ body {
     }
 }
 
+/* Edit Modal Design */
 
 .modal {
     position: fixed;
@@ -341,4 +357,42 @@ body {
 div.form__section.modal__form {
     margin: unset;
     padding-left: 50px;
+}
+
+/* Floating widgets design */
+
+#my-float-1{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:transparent;
+	text-align: center;
+    cursor: pointer;
+}
+#my-float-2{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:105px;
+	right:40px;
+	background-color:transparent;
+	text-align: center;
+    cursor: pointer;
+}
+
+/* Hidden skip links for lighthouse optimization */
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000000;
+    color: white;
+    padding: 8px;
+    z-index: 100;
+}
+.skip-link:focus {
+    top: 0;
 }

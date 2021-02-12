@@ -48,14 +48,24 @@ function initTable() {
         END;
         $$;
 
+        DROP TRIGGER IF EXISTS meme_modified_updated
+        ON memeEntries;
+
         CREATE TRIGGER meme_modified_updated BEFORE UPDATE ON memeEntries
         FOR EACH ROW EXECUTE PROCEDURE 
         update_modified();
         
+
+        ALTER TABLE memeEntries
+        DROP CONSTRAINT IF EXISTS uniqueMemeParams;
         ALTER TABLE memeEntries
         ADD CONSTRAINT uniqueMemeParams UNIQUE(caption, url);`, 
         (err, res) => {
-            console.log(err, res);
+            if(res) {
+                console.log("DB fired UP");
+            } else {
+                console.error(err);
+            }
         }
     );
 }

@@ -11,7 +11,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "heroku": "^7.47.12",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "swagger-jsdoc": "^6.0.2",
+    "swagger-ui-express": "^4.1.6"
   }
 }
