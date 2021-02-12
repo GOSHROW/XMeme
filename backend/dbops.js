@@ -268,21 +268,20 @@ async function getNext(offset) {
 
 /*  PATCH @ /memes/<id>
     excpects valid id
-    will also take up new values for the name, caption, url
+    will also take up new values for the caption, url
     returns error stack on error, result otherwise
 */
 
-async function patchField(id, username, caption, imageURL) {
+async function patchField(id, caption, imageURL) {
     const client = new Client(connectionString);
     try {
         await client.connect();
         let result = await client.query(
             `UPDATE memeEntries
-            SET name = '${username}', 
-                caption = '${caption}',
+            SET caption = '${caption}',
                 url = '${imageURL}'
             WHERE id = ${id};`);
-        return (result);
+        return (result.rowCount);
     } catch(err) {
         return err.stack;
     } finally {
@@ -291,7 +290,7 @@ async function patchField(id, username, caption, imageURL) {
 }
 
 // USAGE AS:
-// patchField(1, 'hi', 'there', 'mister').then(ret => console.log(ret));
+// patchField(28, 'thee', 'mister').then(ret => console.log(ret));
 
 
 /*  PATCH @/memes/likes/<id>

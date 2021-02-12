@@ -39,7 +39,7 @@ async function main() {
     .then(memesJSON => {
         return memesJSON;
     });
-    console.log(memeArray);
+    // console.log(memeArray);
     for (var index = 0; index < memeArray.length; index++) {
         appendMeme(memeArray[index]);
     }

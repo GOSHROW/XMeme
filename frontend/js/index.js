@@ -22,7 +22,7 @@ function postMeme() {
     const xhr = new XMLHttpRequest()
     xhr.addEventListener('readystatechange', function() {
         if (this.readyState === this.DONE) {
-            console.log(this.responseText)
+            // console.log(this.responseText)
         }
     });
     xhr.open('POST', backend + 'memes');
@@ -46,7 +46,7 @@ async function sendLike() {
     const currid = document.getElementById("curr-id").innerHTML.trim();
     var likeorigin = document.getElementById("curr-likes-btn");
     if (likeorigin.getAttribute("liked") == "true") {
-        console.log("ALREADY LIKED")
+        // console.log("ALREADY LIKED")
         return;
     } else {
         localStorage.setItem("like" + currid, "1");  
@@ -119,3 +119,44 @@ async function getNext() {
 }
 
 setLatest();
+
+// MEME EDIT MODAL
+
+var modals = document.querySelectorAll("[data-modal]");
+
+modals.forEach(function (trigger) {
+  trigger.addEventListener("click", function (event) {
+    event.preventDefault();
+    var modal = document.getElementById(trigger.dataset.modal);
+    modal.classList.add("open");
+    var exits = modal.querySelectorAll(".modal-exit");
+    exits.forEach(function (exit) {
+      exit.addEventListener("click", function (event) {
+        event.preventDefault();
+        modal.classList.remove("open");
+      });
+    });
+  });
+});
+
+function patchMeme() {
+    const caption = document.getElementById("edit-caption").value;
+    const url = document.getElementById("edit-url").value;
+    const idToPatch = document.getElementById("curr-id").innerHTML.trim();
+
+    const data = JSON.stringify({
+        caption: caption,
+        url: url
+    });
+    const xhr = new XMLHttpRequest()
+    xhr.addEventListener('readystatechange', function() {
+        if (this.readyState === this.DONE) {
+            // console.log(this.responseText)
+        }
+    });
+    xhr.open('PATCH', backend + 'memes/' + idToPatch);
+    xhr.setRequestHeader('content-type', 'application/json');
+    xhr.send(data);
+
+    setLatest();
+}
