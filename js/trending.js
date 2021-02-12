@@ -1,9 +1,9 @@
-/*  makes the GET /memes/trendy API call to backend and returns JSON
+/*  makes the GET /trends API call to backend and returns JSON
 */
 const backendURL = "http://localhost:8081/";
 
 async function get100memes() {
-    let url = backendURL + "memes/trendy";
+    let url = backendURL + "trends";
     let ret =  await fetch(url)
     .then(data => {
         return data.json()

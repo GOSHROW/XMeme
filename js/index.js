@@ -63,7 +63,7 @@ async function sendLike() {
     } else {
         localStorage.setItem("like" + currid, "1");  
         likeorigin.liked = "true";
-        resJSON  = await fetch(backend + "memes/likes/" + currid, {
+        resJSON  = await fetch(backend + "likes/" + currid, {
             method: "PATCH"
         }).then(res => res.json())
         .then(ret => {
