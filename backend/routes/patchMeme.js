@@ -9,12 +9,48 @@
 const dbops = require('../dbops');
 const validateFields = require('../validateFields');
 
+/**
+* @swagger
+* /memes/{id}:
+*   patch:
+*     tags:
+*       - memes
+*     name: Patch Meme
+*     summary: Updates caption and/or image url of meme at given id
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             $ref: '#/components/schemas/patchParams'
+*     parameters:
+*     - name: "id"
+*       in: "path"
+*       description: "id of the meme which is to be updated"
+*       required: true
+*       type: "integer"
+*       minimum: 0
+*       format: "int64"
+*     responses:
+*       200:
+*         description: Found a valid id and patched properly
+*       409:
+*         description: Same content exists
+*       414:
+*         description: The parameters were unneccesarily lengthy
+*       422:
+*         description: Unpermissible characters were passed
+*       400:
+*         description: The parameters were empty or absent
+*       500:
+*         description: Server errors / bugs inhibited this basic operation
+*/
 module.exports = app => {
     app.patch('/memes/:id', (req, res) => {
         try {
             let idToPatch = req.params.id;
             let paramsJSON = req.body;
-            paramsJSON["name"] = "placeholder";
+            paramsJSON["name"] = "placeholder"; // OP's name cannot be updated
             if (paramsJSON["name"] && paramsJSON["url"] && paramsJSON["caption"]) {
                 if (validateFields.checkParamsRegex(paramsJSON)) {
                     if (validateFields.checkParamsLen(paramsJSON)) {

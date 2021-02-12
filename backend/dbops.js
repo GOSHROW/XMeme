@@ -1,6 +1,6 @@
 const { Pool, Client } = require('pg')
 
-/*  Retaining default user fields, no dotenv / secrets
+/*  Retaining default user fields
     Client connection pool limits provided hence
     pool.end() invoked in 1s
 */
@@ -11,8 +11,6 @@ const pool = new Pool({
   password: null,
   port: 5432,
   max: 50,
-  idleTimeoutMillis: 1000,
-  connectionTimeoutMillis: 2000,
 });
 
 // Pseudo-defualt connection string uses the previous params
@@ -148,7 +146,7 @@ async function get100LatestPOST() {
 
 
 
-/*  GET @ /memes/active/<limit>
+/*  GET @ /trends/<limit>
     excpects int value for limit
     returns all information for recent most <limit> modified rows
 */
@@ -303,7 +301,7 @@ async function patchField(id, caption, imageURL) {
 // patchField(28, 'thee', 'mister').then(ret => console.log(ret));
 
 
-/*  PATCH @/memes/likes/<id>
+/*  PATCH @/likes/<id>
     expect valid id
     and no other data
     increments like field by 1

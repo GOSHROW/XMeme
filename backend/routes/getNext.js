@@ -7,6 +7,32 @@
 */
 const dbops = require("../dbops")
 
+/**
+* @swagger
+* /memes/next/{offset}:
+*   get:
+*     tags:
+*       - memes
+*     name: Get Next 
+*     summary: Gets next meme if available as per id (taken as an offset)
+*     parameters:
+*     - name: "offset"
+*       in: "path"
+*       description: "id of the meme whose next is to be found"
+*       required: true
+*       type: "integer"
+*       minimum: 0
+*       format: "int64"
+*     responses:
+*       200:
+*         description: Found a valid id and delivered its next meme(s) properly
+*       404:
+*         description: The provided id was formatted properly but has no next meme
+*       406:
+*         description: The provided id was formatted incorrectly
+*       500:
+*         description: Server errors / bugs inhibited this basic operation
+*/
 module.exports = app => {
     app.get('/memes/next/:offset', (req, res) => {
         try {

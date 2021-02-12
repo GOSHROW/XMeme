@@ -6,6 +6,20 @@
 */
 const dbops = require('../dbops');
 
+/**
+* @swagger
+* /memes:
+*   get:
+*     tags:
+*       - memes
+*     name: Get Meme
+*     summary: Gets id, name, caption, url of max 100 latest memes
+*     responses:
+*       200:
+*         description: Found and delivered all memes properly
+*       500:
+*         description: Server errors / bugs inhibited this basic operation
+*/
 module.exports = app => {
     app.get('/memes', (req, res) => {
         try {

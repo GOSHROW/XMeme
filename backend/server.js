@@ -11,20 +11,75 @@ dbops.initTable();
 
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const swaggerApp = express();
+const swaggerPort = 8080;
+swaggerApp.use(cors());
 
 const swaggerDefinition = {
+    openapi: "3.0.0",
     info: {
-      title: 'Swagger for xMeme @ GOSHROW',
-      version: '1.0.0',
-      description: 'Endpoints to fully access the xMeme Web-App',
+        title: 'Swagger for xMeme @ GOSHROW',
+        version: '1.0.0',
+        description: 'Endpoints to fully access the xMeme Web-App',
     },
-    host: 'localhost:8080',
-    basePath: '/'
+    contact: {
+        email: "goshrow@gmail.com",
+    },
+    license: {
+        name: "GNU General Public License v3.0",
+        url: "https://www.gnu.org/licenses/gpl-3.0.en.html",
+    },
+    tags: [
+        {
+            name: "memes",
+            description: "Definite route to handle all operations hereon",
+        },
+    ],
+    host: 'localhost:8081',
+    basepath: '/',
+    servers: [
+        {
+            url: 'http://localhost:8081/',
+            description: 'Local server',
+        },
+    ],
+    "components": {
+        "schemas": {
+          "patchParams": {
+            "properties": {
+              "url": {
+                "type": "string",
+                "required": "true",
+              },
+              "caption": {
+                "type": "string",
+                "required": "true",
+              },
+            },
+          },
+          "postParams": {
+            "properties": {
+            "name": {
+                  "type": "string",
+                  "required": "true",
+                },
+              "url": {
+                "type": "string",
+                "required": "true",
+              },
+              "caption": {
+                "type": "string",
+                "required": "true",
+              },
+            },
+          },
+        },
+      },
 };
 
 const options = {
     swaggerDefinition,
-    apis: ['./routes/*.js'],
+    apis: ['./routes/*.js']
 };
 
 const swaggerSpec = swaggerJSDoc(options);
@@ -32,7 +87,7 @@ app.get('/swagger.json', function(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
 });
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+swaggerApp.use('/swagger-ui', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /*  wrong / un-implemented endpoints will be a 4xx response
     AS per maturity level 5 redirect to the swagger docs once implemented 
@@ -52,5 +107,8 @@ require('./routes/patchMeme')(app);
 require('./routes/postMeme')(app);
 
 app.listen(port, () =>
-  console.log(`xMeme backend listening on port ${port}`),
+    console.log(`xMeme backend listening on port ${port}`),
+);
+swaggerApp.listen(swaggerPort, () => 
+    console.log('Swagger Up at ' + swaggerPort),
 );

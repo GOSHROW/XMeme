@@ -9,6 +9,35 @@
 const dbops = require('../dbops');
 const validateFields = require('../validateFields');
 
+/**
+* @swagger
+* /memes:
+*   post:
+*     tags:
+*       - memes
+*     name: Post Meme
+*     summary: Puts OP's name, caption and image url of meme. Returns id as a JSON
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             $ref: '#/components/schemas/postParams'
+*     responses:
+*       200:
+*         description: Posted Successfully
+*       409:
+*         description: Same content exists
+*       414:
+*         description: The parameters were unneccesarily lengthy
+*       422:
+*         description: Unpermissible characters were passed
+*       400:
+*         description: The parameters were empty or absent
+*       500:
+*         description: Server errors / bugs inhibited this basic operation
+*/
+
 module.exports = app => {
     app.post('/memes', (req, res) => {
         try {
