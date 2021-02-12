@@ -47,10 +47,6 @@
                         <div id="curr-caption">
                             NEVER GONNA GIVE YOU UP
                         </div>
-                        <br/><br/>
-                        <div id="curr-img">
-                            <img src="assets/meme404.jpg" id="meme-img" onerror="this.src='assets/meme404.jpg'"/>
-                        </div>
                         <br/>
                         <div>
                             ~
@@ -64,7 +60,7 @@
                         </div>
                         <br/><br/>
                         <div id="curr-options">
-                            <span id="curr-likes-btn" liked="false">
+                            <span id="curr-likes-btn" liked="false" onclick="sendLike();" ondblclick="sendLike()">
                                 &#8679;
                             </span>
                             <span id="curr-likes-cntr">
@@ -75,11 +71,15 @@
                                 EDIT
                             </span>
                         </div>
-                    </div>
                         <br/>
-                    <div id="meme-nav">
-                        <span id="left-ptr" onclick="getPrevious()">&#8617;</span>
-                        <span id="right-ptr" onclick="getNext()">&#8618;</span>
+                        <div id="meme-nav">
+                            <span id="left-ptr" onclick="getPrevious()">&#8617;</span>
+                            <span id="right-ptr" onclick="getNext()">&#8618;</span>
+                        </div>
+                        <br/><br/>
+                        <div id="curr-img">
+                            <img src="assets/meme404.jpg" id="meme-img" onerror="this.src='assets/meme404.jpg'"/>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -294,7 +294,7 @@ async function patchField(id, username, caption, imageURL) {
 // patchField(1, 'hi', 'there', 'mister').then(ret => console.log(ret));
 
 
-/*  PATCH @/memes/<id>
+/*  PATCH @/memes/likes/<id>
     expect valid id
     and no other data
     increments like field by 1
