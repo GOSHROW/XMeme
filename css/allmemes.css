@@ -85,6 +85,7 @@ blockquote cite:before {
 
 .meme-img {
     width: 60%;
+    max-height: 80vh;
 }
 
 @media screen and (max-width : 2600px) {
