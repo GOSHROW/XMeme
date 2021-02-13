@@ -396,3 +396,9 @@ div.form__section.modal__form {
 .skip-link:focus {
     top: 0;
 }
+
+/* Ugly hyperlink decoration are the worst */
+a {
+    text-decoration: none;
+    color: darkgray;
+}
