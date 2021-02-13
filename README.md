@@ -24,7 +24,7 @@ Would work out to set up your node server at port 8081, publish the swagger at p
 
 1. Install latest versions of node and npm
 1. Install the backend packages from backend directory, by  ```npm i```
-1. Install postgresql locally and create a database *memeDB* accessible as ```postgresql://localhost:5432/memeDB```
+1. Install postgresql locally and create a database *memeDB* accessible as ```postgresql://localhost:5432/postgres```
 1. Start the server by ```npm start```
 
 ## Frontend ?
