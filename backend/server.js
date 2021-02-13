@@ -90,10 +90,14 @@ app.get('/swagger.json', function(req, res) {
 swaggerApp.use('/swagger-ui', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /*  wrong / un-implemented endpoints will be a 4xx response
-    AS per maturity level 5 redirect to the swagger docs once implemented 
+    AS per maturity level 5, the root redirects to the swagger docs 
 */
 app.get('/', (req, res) => {
-    res.sendStatus(501); // for now
+    try {
+      res.redirect('http://localhost:8080/swagger-ui');
+    } catch {
+      res.sendStatus(404)
+    }
 });
 
 require('./routes/getMemes')(app);

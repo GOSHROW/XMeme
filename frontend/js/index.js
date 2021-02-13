@@ -65,7 +65,7 @@ async function sendLike() {
         likeorigin.liked = "true";
         resJSON  = await fetch(backend + "likes/" + currid, {
             method: "PATCH"
-        }).then(res => res.json())
+        }).then(res => {})
         .then(ret => {
             document.getElementById("curr-likes-btn").setAttribute("liked", (localStorage.getItem("like" + currid) == "1") ? "true" : "false");
             // console.log(currid + "liked" + localStorage.getItem("like" + currid));
