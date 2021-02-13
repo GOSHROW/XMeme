@@ -5,16 +5,16 @@ const { Pool, Client } = require('pg')
     pool.end() invoked in 1s
 */
 const pool = new Pool({
-  user: 'postgres',
+  user: 'user',
   host: 'localhost',
-  database: 'memeDB',
+  database: 'postgres',
   password: null,
   port: 5432,
   max: 50,
 });
 
 // Pseudo-defualt connection string uses the previous params
-const connectionString = "postgresql://localhost:5432/memeDB"
+const connectionString = "postgresql://localhost:5432/postgres"
 
 /*  SQL Schema has
     a serially incrementing ID acting as a Primary Key

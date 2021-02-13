@@ -1,6 +1,6 @@
 #! /bin/zsh -
 
-# run script just after creating the memeDB and ensure the backend api is on
+# run script just after creating the DB and ensure the backend api is on
 
 # make 100 POST requests
 for i in {1..100}
