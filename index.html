@@ -89,11 +89,11 @@
                 <div class="modal-container">
                     <form class="form__group">
                         <div class="form__section modal__form" style="margin: none">
-                            <input type="input" autocomplete="off" class="form__field" name="edit-caption" pattern="^[ \.a-zA-Z0-9-_']+$" placeholder="New Caption" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Use alphanumeric characters, space, period, hyphen, apostrophe or underscore')"  id='edit-caption' required />
+                            <input type="input" autocomplete="off" class="form__field" name="edit-caption" pattern="^[ \.a-zA-Z0-9-_']+$" placeholder="New Caption" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Use alphanumeric characters, space, period, hyphen, apostrophe or underscore')"  id='edit-caption' />
                             <label for="edit-caption" class="form__label">New Caption</label>
                         </div>
                         <div class="form__section modal__form" style="margin: none">
-                            <input type="url" autocomplete="off" class="form__field" name="edit-url" placeholder="New URL" id='edit-url' onblur="addHTTP(this)" required />
+                            <input type="url" autocomplete="off" class="form__field" name="edit-url" placeholder="New URL" id='edit-url' onblur="addHTTP(this)"/>
                             <label for="edit-url" class="form__label">New URL</label>
                         </div>
                         <div class="form__section modal__form" style="margin: none">
