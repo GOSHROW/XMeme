@@ -1,6 +1,6 @@
 /*  makes the GET /memes API call to backend and returns JSON
 */
-const backendURL = "http://localhost:8081/";
+const backendURL = "https://apixmeme.goshrow.tech/";
 
 async function get100memes() {
     let url = backendURL + "memes";
