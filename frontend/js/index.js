@@ -10,7 +10,7 @@ function addHTTP (url) {
     return url;
 }
 
-const backend = "http://localhost:8081/"
+const backend = "https://apixmeme.goshrow.tech/"
 
 /*  Triggered by #post, makes a POST API call to initiate a new entry into DB
     Uses values in the form input fields.
