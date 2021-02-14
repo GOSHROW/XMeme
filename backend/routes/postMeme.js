@@ -67,8 +67,8 @@ module.exports = app => {
                 res.sendStatus(400); // any of the compulsory fields are missing
             }
         } catch(err) {
-            if (err.includes("uniquememeparams")) {
-                res.sendStatus(422);
+            if (err.toString().includes("uniquememeparams")) {
+                res.sendStatus(409);
             }
             res.sendStatus(500);
         }

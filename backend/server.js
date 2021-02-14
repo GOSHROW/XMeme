@@ -49,11 +49,9 @@ const swaggerDefinition = {
             "properties": {
               "url": {
                 "type": "string",
-                "required": "true",
               },
               "caption": {
-                "type": "string",
-                "required": "true",
+                "type": "string", 
               },
             },
           },
