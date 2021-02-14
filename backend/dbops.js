@@ -5,16 +5,16 @@ const { Pool, Client } = require('pg')
     pool.end() invoked in 1s
 */
 const pool = new Pool({
-  user: 'user',
+  user: 'postgres',
   host: 'localhost',
   database: 'postgres',
-  password: null,
+  password: 'postgres',
   port: 5432,
   max: 50,
 });
 
 // Pseudo-defualt connection string uses the previous params
-const connectionString = "postgresql://localhost:5432/postgres"
+const connectionString = "postgresql://postgres:postgres@localhost:5432/postgres"
 
 /*  SQL Schema has
     a serially incrementing ID acting as a Primary Key
@@ -27,8 +27,10 @@ const connectionString = "postgresql://localhost:5432/postgres"
     Added contraint to identify unique POST requests pre-transaction
 */
 
-function initTable() {
-    pool.query(
+async function initTable() {
+	const client = new Client(connectionString);
+        await client.connect();
+    	let res = client.query(
         `CREATE TABLE IF NOT EXISTS memeEntries( 
             id SERIAL PRIMARY KEY, 
             name VARCHAR(100) NOT NULL, 

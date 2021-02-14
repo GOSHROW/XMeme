@@ -1,3 +1,3 @@
 #! /bin/bash
-sudo systemctl enable postgresql
 sudo systemctl start postgresql
+sudo -u postgres psql -c "ALTER USER postgres  PASSWORD 'postgres';"

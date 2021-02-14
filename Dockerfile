@@ -10,10 +10,7 @@ RUN apt-get install -y nodejs
 RUN nodejs --version
 RUN npm --version
 RUN npm install
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata && rm -rf /var/lib/apt/lists/*
 RUN apt-get update && apt-get install -y postgresql postgresql-contrib
-RUN dpkg --status postgresql
-EXPOSE 5432
 CMD ["sh","./systemctlPostgresql.sh"]
 RUN sleep 20
 COPY ./backend/ ./

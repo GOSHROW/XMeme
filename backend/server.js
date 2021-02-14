@@ -94,7 +94,7 @@ swaggerApp.use('/swagger-ui', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 */
 app.get('/', (req, res) => {
     try {
-      res.redirect('http://localhost:8080/swagger-ui');
+      res.redirect('http://40.80.81.122:8080/swagger-ui');
     } catch {
       res.sendStatus(404)
     }

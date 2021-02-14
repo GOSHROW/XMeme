@@ -1,6 +1,6 @@
 const { Pool, Client } = require('pg')
 
-const connectionString = "postgresql://localhost:5432/postgres"
+const connectionString = "postgresql://postgres:postgres@localhost:5432/postgres"
 
 function checkParamsRegex(memeParamsJSON) {
     return((/^[ \.a-zA-Z0-9-_']+$/.test(memeParamsJSON["name"])) 

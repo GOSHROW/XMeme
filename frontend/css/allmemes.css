@@ -22,10 +22,15 @@ body::-webkit-scrollbar-thumb {
 
 /* General Pattern laced layout */
 
-#bg-pattern {
+main {
+    width: 100vw;
+}
+
+#bg-pattern {  
+    width: 100vw;
     background-image: linear-gradient(black 1px, transparent 1px), linear-gradient(to right, rgb(65, 31, 97) 1px, transparent 1px);
     background-size: 10px 10px;
-    display: inline-block;  
+    display: inline-block;
 }
 
 #memes-section {

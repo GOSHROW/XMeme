@@ -10,17 +10,12 @@ curl -fsSL https://deb.nodesource.com/setup_current.x | bash -
 apt-get update
 apt-get -y upgrade
 apt-get install -y nodejs
-nodejs --version
-npm --version
-
-cd src/backend
-npm install
 
 apt-get install -y postgresql postgresql-contrib
-systemctl enable postgres
-systemctl start postgres
 
 # Any configuration related commands
-
-createdb -h localhost -p 5432 -U postgres postgres
-cd ..
+nodejs --version
+npm --version
+# systemctl enable postgresql
+systemctl start postgresql
+sudo -u postgres psql -c "ALTER USER postgres  PASSWORD 'postgres';"
