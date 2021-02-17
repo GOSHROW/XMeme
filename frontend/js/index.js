@@ -99,7 +99,7 @@ function beautifiedTime(iso8061) {
             if (Math.abs(elapsed) > units[u] || u == 'second') 
                 return rtf.format(Math.round(elapsed/units[u]), u)
     }
-    return getRelativeTime(now, timestamp);
+    return getRelativeTime(timestamp, now);
 }
 
 /* Get latest meme in case none have been provided yet
