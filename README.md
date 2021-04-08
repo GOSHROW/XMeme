@@ -1,5 +1,4 @@
-# XMeme-cwod2b
-**cwod stage 2b**
+# XMeme
 
 The app has been divided into two parts: frontend and backend. And both have been deployed seperately.
 
